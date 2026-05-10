@@ -147,35 +147,6 @@
     outline: 3px solid var(--rosso-scout);
     outline-offset: 2px;
   }
-  .triangolo {
-    flex-shrink: 0;
-    width: 36px;
-    height: 36px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .triangolo::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    width: 0; height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-bottom: 32px solid var(--rosso-scout);
-    margin: 4px 0 0 0;
-    filter: drop-shadow(1px 2px 2px rgba(0,0,0,0.2));
-  }
-  .triangolo span {
-    position: relative;
-    color: white;
-    font-weight: bold;
-    font-size: 0.7rem;
-    margin-top: 8px;
-    z-index: 1;
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
-  }
   .nome-spec {
     font-size: 1.05rem;
     font-weight: bold;
@@ -227,14 +198,6 @@
     align-items: center;
     gap: 18px;
     position: relative;
-  }
-  .modal-header .triangolo-grande {
-    flex-shrink: 0;
-    width: 0; height: 0;
-    border-left: 26px solid transparent;
-    border-right: 26px solid transparent;
-    border-bottom: 46px solid var(--rosso-scout);
-    filter: drop-shadow(2px 3px 3px rgba(0,0,0,0.25));
   }
   .modal-header h2 {
     font-size: 1.7rem;
@@ -371,7 +334,7 @@
   <div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titolo">
     <div class="modal">
       <div class="modal-header">
-        <div class="triangolo-grande" aria-hidden="true"></div>
+        <img id="modal-foto" src="" alt="" style="width:52px;height:52px;object-fit:contain;flex-shrink:0;">
         <div>
           <h2 id="modal-titolo"></h2>
           <span class="varianti" id="modal-varianti"></span>
@@ -395,7 +358,28 @@
 <script>
 const SPECIALITA = [
   {
+    "nome": "Amico di Aronne",
+    "foto": "img/amico_di_aronne.png",
+    "varianti": "servizio liturgico",
+    "descrizione": "Il bambino scopre la bellezza della preghiera e impara a partecipare attivamente alla vita liturgica della comunità cristiana, conoscendo i gesti, le parole e i tempi della Messa.",
+    "prove": [
+      "Conoscere, scrivere sul quaderno di caccia/volo e pregare spesso le preghiere della tradizione cristiana.",
+      "Guardare la natura, i suoi singoli elementi (acqua, luce, fuoco, pane e vino) e lodare Dio che li ha creati attraverso semplici preghiere. Scoprire che anche il corpo dell'uomo è fatto per pregare: con la voce, coi gesti, con gli occhi.",
+      "Partecipare alla celebrazione della S. Messa e conoscere il significato di gesti e parole.",
+      "Realizzare disegni o cartelloni sui sacramenti, sull'anno liturgico, sulle principali feste cristiane.",
+      "Partecipare attivamente alla S. Messa, svolgendo con regolarità un compito come: cantare, leggere, servire all'altare.",
+      "Preparare in casa o in tana/sede un angolo della preghiera, con un'immagine del Signore o di Maria, una candela, una preghiera. Vedere come è fatto un Messale e imparare a prepararlo per la liturgia."
+    ],
+    "proveCda": [
+      "Preparare il momento della preghiera per i fratellini e le sorelline, al termine della riunione o del volo/caccia.",
+      "Curare un semplice luogo per la preghiera al campo.",
+      "Aiutare i capi a preparare la preghiera per la riunione o la S.Messa alle Vacanze di Branco/Cerchio",
+      "Insegnare i canti liturgici ai fratellini e alle sorelline."
+    ]
+  },
+  {
     "nome": "Amico degli Animali",
+    "foto": "img/amico_degli_animali.png",
     "varianti": "etologo, allevatore",
     "descrizione": "Il bambino impara a conoscere, rispettare e prendersi cura degli animali, scoprendone le caratteristiche, le abitudini e l'importanza che hanno nell'equilibrio della natura.",
     "prove": [
@@ -411,20 +395,8 @@ const SPECIALITA = [
     ]
   },
   {
-    "nome": "Amico di Aronne",
-    "varianti": "servizio liturgico",
-    "descrizione": "Il bambino scopre la bellezza della preghiera e impara a partecipare attivamente alla vita liturgica della comunità cristiana, conoscendo i gesti, le parole e i tempi della Messa.",
-    "prove": [
-      "Conoscere, scrivere sul quaderno di caccia/volo e pregare spesso le preghiere della tradizione cristiana.",
-      "Guardare la natura, i suoi singoli elementi (acqua, luce, fuoco, pane e vino) e lodare Dio che li ha creati attraverso semplici preghiere. Scoprire che anche il corpo dell'uomo è fatto per pregare: con la voce, coi gesti, con gli occhi.",
-      "Partecipare alla celebrazione della S. Messa e conoscere il significato di gesti e parole.",
-      "Realizzare disegni o cartelloni sui sacramenti, sull'anno liturgico, sulle principali feste cristiane.",
-      "Partecipare attivamente alla S. Messa, svolgendo con regolarità un compito come: cantare, leggere, servire all'altare.",
-      "Preparare in casa o in tana/sede un angolo della preghiera, con un'immagine del Signore o di Maria, una candela, una preghiera. Vedere come è fatto un Messale e imparare a prepararlo per la liturgia."
-    ]
-  },
-  {
     "nome": "Amico del Mare",
+    "foto": "img/amico_del_mare.png",
     "varianti": "canoista, marinaio, navigatore, maestro dell'acqua",
     "descrizione": "Il bambino scopre il mare come ambiente affascinante e ricco di vita, imparando a conoscerlo, a rispettarlo e a muoversi in sicurezza in acqua.",
     "prove": [
@@ -447,6 +419,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Amico della Natura",
+    "foto": "img/amico_della_natura.png",
     "varianti": "naturalista, ecologo, geologo",
     "descrizione": "Il bambino impara a osservare, riconoscere e rispettare la natura in tutte le sue forme, scoprendo il legame profondo che unisce ogni creatura del Creato.",
     "prove": [
@@ -465,6 +438,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Amico di Samuele",
+    "foto": "img/amico_di_samuele.png",
     "varianti": "servizio della parola, lettore",
     "descrizione": "Il bambino si avvicina alla Parola di Dio attraverso la conoscenza della Bibbia e del Vangelo, imparando ad ascoltare, leggere e annunciare la Buona Notizia.",
     "prove": [
@@ -482,6 +456,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Amico di San Francesco",
+    "foto": "img/amico_di_sanfrancesco.png",
     "varianti": "servizio di tutti",
     "descrizione": "Sull'esempio di San Francesco d'Assisi, il bambino scopre la gioia di amare Dio attraverso la natura, la povertà e il servizio agli altri, soprattutto a chi soffre.",
     "prove": [
@@ -497,6 +472,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Artigiano",
+    "foto": "img/artigiano.png",
     "varianti": "falegname, scultore, modellista, intagliatore, lavorazione del cuoio",
     "descrizione": "Il bambino impara a lavorare con le proprie mani, costruendo oggetti utili con materiali e tecniche diverse e scoprendo la bellezza del fare bene le cose.",
     "prove": [
@@ -512,6 +488,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Astronomo",
+    "foto": "img/astronomo.png",
     "varianti": "cosmologo",
     "descrizione": "Il bambino alza lo sguardo al cielo per scoprire stelle, costellazioni e pianeti, imparando a orientarsi con l'aiuto degli astri e a meravigliarsi della grandezza dell'universo.",
     "prove": [
@@ -533,6 +510,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Atleta",
+    "foto": "img/atleta.png",
     "varianti": "ciclista, nuotatore, ginnasta, pattinatore",
     "descrizione": "Il bambino impegna corpo e volontà nello sport, imparando a curare la propria forma fisica, a migliorarsi giorno dopo giorno e a conoscere il proprio corpo.",
     "prove": [
@@ -550,6 +528,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Attore",
+    "foto": "img/attore.png",
     "varianti": "regista, costumista, mimo, teatrante, animatore di bans",
     "descrizione": "Il bambino scopre la magia del teatro e dell'animazione, imparando a interpretare personaggi, a recitare in pubblico e ad animare il Branco/Cerchio con bans, scenette e danze.",
     "prove": [
@@ -570,6 +549,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Botanico",
+    "foto": "img/botanico.png",
     "varianti": "conoscitore di piante, di fiori, erbe medicinali",
     "descrizione": "Il bambino impara a conoscere il mondo vegetale, a riconoscere piante e fiori, a curarli e a comprendere il ruolo che hanno nell'ambiente.",
     "prove": [
@@ -587,6 +567,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Canterino",
+    "foto": "img/canterino.png",
     "varianti": "cantautore, corista",
     "descrizione": "Il bambino scopre la bellezza del canto come mezzo per esprimersi, pregare e stare insieme, imparando a usare bene la voce e a conoscere ritmi e melodie.",
     "prove": [
@@ -603,6 +584,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Cercatore di Tracce",
+    "foto": "img/cercatore_di_tracce.png",
     "varianti": "osservatore, raccoglitore di tracce",
     "descrizione": "Il bambino affina i sensi per osservare, riconoscere e seguire le tracce di animali, persone e mezzi, imparando a leggere l'ambiente come un vero esploratore.",
     "prove": [
@@ -623,6 +605,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Cittadino del Mondo",
+    "foto": "img/cittadino_del_mondo.png",
     "varianti": "interprete, geografo, amico di penna, europeista",
     "descrizione": "Il bambino allarga lo sguardo oltre il proprio paese, scoprendo culture, lingue e tradizioni di altri popoli e sentendosi parte di una grande famiglia mondiale.",
     "prove": [
@@ -640,6 +623,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Collezionista",
+    "foto": "img/collezionista.png",
     "varianti": "raccoglitore, bibliotecario, modellista, filatelico, numismatico",
     "descrizione": "Il bambino impara a curare con passione una collezione, scoprendo il valore della costanza, dell'ordine e della conoscenza approfondita di ciò che raccoglie.",
     "prove": [
@@ -655,6 +639,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Cuoco",
+    "foto": "img/cuoco.png",
     "varianti": "pasticciere, fornaio, pizzaiolo, panettiere",
     "descrizione": "Il bambino entra in cucina con curiosità e sicurezza, imparando a cucinare semplici piatti, a conoscere gli alimenti e a vivere una sana alimentazione.",
     "prove": [
@@ -676,6 +661,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Disegnatore",
+    "foto": "img/disegnatore.png",
     "varianti": "pittore, vignettista, ritrattista, caricaturista, scenografo, grafico",
     "descrizione": "Il bambino esprime la propria creatività attraverso il disegno e la pittura, sperimentando tecniche diverse e imparando a rappresentare ciò che vede e immagina.",
     "prove": [
@@ -692,6 +678,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Folclorista",
+    "foto": "img/folclorista.png",
     "varianti": "amico delle tradizioni, storico",
     "descrizione": "Il bambino scopre le tradizioni, le storie, i canti e le usanze del proprio paese, imparando a custodire e a raccontare la cultura del luogo in cui vive.",
     "prove": [
@@ -711,6 +698,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Fotografo",
+    "foto": "img/fotografo.png",
     "varianti": "cineasta, cameraman",
     "descrizione": "Il bambino impara l'arte della fotografia, scoprendo come catturare un momento, raccontare per immagini e usare la macchina fotografica con cura e creatività.",
     "prove": [
@@ -728,6 +716,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Giardiniere",
+    "foto": "img/giardiniere.png",
     "varianti": "orticultore, selvicoltore, agricoltore, floricoltore",
     "descrizione": "Il bambino impara a coltivare con cura piante, fiori e ortaggi, scoprendo la pazienza, la fatica e la gioia di vedere crescere ciò che si è seminato.",
     "prove": [
@@ -749,6 +738,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Giocatore di Squadra",
+    "foto": "img/giocatore_di_squadra.png",
     "varianti": "allenatore, tattico",
     "descrizione": "Il bambino vive lo sport di squadra come occasione di amicizia, lealtà e collaborazione, imparando a dare il meglio di sé e a coinvolgere tutti i compagni.",
     "prove": [
@@ -764,6 +754,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Giocattolaio",
+    "foto": "img/giocattolaio.png",
     "varianti": "burattinaio, inventore, costruttore di plastici",
     "descrizione": "Il bambino dà vita alla propria fantasia costruendo giocattoli, marionette e burattini con materiali semplici, scoprendo la magia del fare con le proprie mani.",
     "prove": [
@@ -777,6 +768,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Giornalista",
+    "foto": "img/giornalista.png",
     "varianti": "cronista, corrispondente",
     "descrizione": "Il bambino impara a osservare, raccontare e informare con curiosità e onestà, scoprendo il mondo dei giornali e il piacere di scrivere notizie.",
     "prove": [
@@ -789,6 +781,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Guida",
+    "foto": "img/guida.png",
     "varianti": "segnalatore, orientamento, topografo, amico del quartiere",
     "descrizione": "Il bambino impara a conoscere la propria città e a orientarsi tra strade, mezzi e monumenti, diventando una guida sicura e attenta per chi cerca informazioni.",
     "prove": [
@@ -806,6 +799,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Infermiere",
+    "foto": "img/infermiere.png",
     "varianti": "amico dell'handicap, soccorritore, massaggiatore",
     "descrizione": "Il bambino impara le basi del primo soccorso e dell'aiuto a chi sta male, scoprendo l'importanza della prevenzione e della cura attenta verso chi ha bisogno.",
     "prove": [
@@ -825,6 +819,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Kim",
+    "foto": "img/kim.png",
     "varianti": "osservatore, ascoltatore, annusatore, degustatore",
     "descrizione": "Sull'esempio del Kim di Kipling, il bambino allena i cinque sensi per osservare, ricordare e cogliere ogni dettaglio del mondo che lo circonda.",
     "prove": [
@@ -842,6 +837,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Maestro del Bosco",
+    "foto": "img/maestro_del_bosco.png",
     "varianti": "boscaiolo, orientamento, ecosistema",
     "descrizione": "Il bambino entra nel bosco con rispetto e curiosità, imparando a conoscerne alberi, animali, suoni e segreti, e a muoversi al suo interno senza danneggiarlo.",
     "prove": [
@@ -863,6 +859,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Maestro di Danze",
+    "foto": "img/maestro_di_danze.png",
     "varianti": "ballerina, inventore di danze",
     "descrizione": "Il bambino esprime la gioia attraverso il movimento e la danza, imparando passi, ritmi e tradizioni e diventando capace di guidare gli altri nel ballo.",
     "prove": [
@@ -880,6 +877,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Maestro dei Giochi",
+    "foto": "img/maestro_dei_giochi.png",
     "varianti": "inventa giochi",
     "descrizione": "Il bambino diventa esperto di giochi, imparando a inventarli, spiegarli e proporli al Branco/Cerchio per far divertire tutti, grandi e piccoli.",
     "prove": [
@@ -901,6 +899,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Maestro della Salute",
+    "foto": "img/maestro_della_salute.png",
     "varianti": "igienista, dietologo",
     "descrizione": "Il bambino impara a prendersi cura del proprio corpo e di quello degli altri, conoscendo le regole di una sana alimentazione, dell'igiene e della prevenzione.",
     "prove": [
@@ -924,6 +923,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Mani Abili",
+    "foto": "img/mani_abili.png",
     "varianti": "tuttofare, inventore, pionieristica",
     "descrizione": "Il bambino diventa abile con le mani, imparando a costruire, riparare e inventare oggetti utili usando i materiali e gli attrezzi più diversi.",
     "prove": [
@@ -945,6 +945,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Massaio",
+    "foto": "img/massaio.png",
     "varianti": "aiuto in casa",
     "descrizione": "Il bambino impara a essere utile in casa, prendendosi cura degli ambienti, dell'ordine e della pulizia, diventando un piccolo aiuto prezioso per la famiglia.",
     "prove": [
@@ -962,6 +963,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Meteorologo",
+    "foto": "img/metereologo.png",
     "varianti": "nivologo, rosa dei venti",
     "descrizione": "Il bambino impara a osservare e prevedere il tempo, conoscendo nuvole, venti, fenomeni atmosferici e gli strumenti per misurarli.",
     "prove": [
@@ -980,6 +982,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Montanaro",
+    "foto": "img/montanaro.png",
     "varianti": "alpinista, camminatore, boscaiolo, speleologo",
     "descrizione": "Il bambino impara ad amare la montagna, a camminarci con passo giusto, a riconoscerne la natura e a rispettarne le regole e le bellezze.",
     "prove": [
@@ -1005,6 +1008,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Musicista",
+    "foto": "img/musicista.png",
     "varianti": "liutaio, suonatore, costruttore di strumenti, musico",
     "descrizione": "Il bambino entra nel mondo della musica imparando a conoscere strumenti, note e ritmi, e provando a suonare o costruire piccoli strumenti.",
     "prove": [
@@ -1020,6 +1024,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Ripara-Ricicla",
+    "foto": "img/ripara_e_ricicla.png",
     "varianti": "riparatore, riciclatore, riutilizzatore",
     "descrizione": "Il bambino impara a riparare, riusare e riciclare con creatività, scoprendo il valore delle cose e l'importanza di non sprecare le risorse del Creato.",
     "prove": [
@@ -1038,6 +1043,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Sarto",
+    "foto": "img/sarto.png",
     "varianti": "modista, ricamatore",
     "descrizione": "Il bambino impara a usare ago, filo e stoffa per cucire, rammendare e creare costumi, scoprendo l'arte e la pazienza del lavoro fatto a mano.",
     "prove": [
@@ -1055,6 +1061,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Scaccia Pericoli",
+    "foto": "img/scaccia_pericoli.png",
     "varianti": "casa sicura, tana sicura, E.P.C.",
     "descrizione": "Il bambino impara a riconoscere i pericoli e a prevenirli, conoscendo le regole della sicurezza in casa, in tana e in caso di emergenza.",
     "prove": [
@@ -1071,6 +1078,7 @@ const SPECIALITA = [
   },
   {
     "nome": "Scrittore",
+    "foto": "img/scrittore.png",
     "varianti": "poeta, lettore, narratore, cantastorie, sceneggiatore",
     "descrizione": "Il bambino scopre il piacere della scrittura e della lettura, imparando a raccontare, descrivere e inventare storie con parole proprie.",
     "prove": [
@@ -1100,7 +1108,6 @@ const modalDescrizione = document.getElementById('modal-descrizione');
 const modalProve = document.getElementById('modal-prove');
 const chiudiBtn = document.getElementById('chiudi');
 
-// ordina alfabeticamente (case-insensitive, locale italiana)
 SPECIALITA.sort((a, b) => a.nome.localeCompare(b.nome, 'it', { sensitivity: 'base' }));
 
 function rendi(filtro = '') {
@@ -1127,7 +1134,7 @@ function rendi(filtro = '') {
     card.className = 'specialita-card';
     card.setAttribute('aria-label', `Apri scheda ${s.nome}`);
     card.innerHTML = `
-      <div class="triangolo" aria-hidden="true"></div>
+      <img src="${s.foto}" alt="${s.nome}" style="width:36px;height:36px;object-fit:contain;flex-shrink:0;">
       <div class="nome-spec">${s.nome}</div>
       <span class="freccia" aria-hidden="true">›</span>
     `;
@@ -1137,18 +1144,40 @@ function rendi(filtro = '') {
 }
 
 function apriModal(s) {
+  document.getElementById('modal-foto').src = s.foto;
+  document.getElementById('modal-foto').alt = s.nome;
   modalTitolo.textContent = s.nome;
   modalVarianti.textContent = s.varianti ? `Varianti: ${s.varianti}` : '';
   modalDescrizione.textContent = s.descrizione;
   modalProve.innerHTML = '';
+
+  // Rimuovi eventuali sezioni CdA precedenti
+  document.querySelectorAll('.sezione-cda').forEach(el => el.remove());
+
   s.prove.forEach(p => {
     const li = document.createElement('li');
     li.textContent = p;
     modalProve.appendChild(li);
   });
+
   modalOverlay.classList.add('attivo');
   document.body.style.overflow = 'hidden';
   setTimeout(() => chiudiBtn.focus(), 50);
+
+  if (s.proveCda && s.proveCda.length > 0) {
+    const h3Cda = document.createElement('h3');
+    h3Cda.textContent = 'Prove per CdA';
+    h3Cda.className = 'sezione-cda';
+    modalProve.parentElement.appendChild(h3Cda);
+    const ulCda = document.createElement('ul');
+    ulCda.className = 'sezione-cda';
+    s.proveCda.forEach(p => {
+      const li = document.createElement('li');
+      li.textContent = p;
+      ulCda.appendChild(li);
+    });
+    modalProve.parentElement.appendChild(ulCda);
+  }
 }
 
 function chiudiModal() {
