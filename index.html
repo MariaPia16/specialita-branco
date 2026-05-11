@@ -370,25 +370,25 @@
       }
 
       header h1 {
-        font-size: 1rem;
+        font-size: 1.2rem;
         line-height: 1.15;
         padding-left: 10px;
         padding-right: 10px;
       }
 
       header {
-        padding: 30px 15px 40px;
+        padding: 5px 5px 8px;
       }
 
       .titolo-header {
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 2px;
       }
 
       .logo-header {
         width: 40px;
-        margin-top: 10px;
-        margin-bottom: 15px;
+        margin-top: 8px;
+        margin-bottom: 13px;
       }
 
       .lista {
@@ -396,7 +396,7 @@
       }
 
       .modal-header {
-        padding: 20px 18px;
+        padding: 15px 13px;
       }
 
       .modal-header h2 {
@@ -452,10 +452,14 @@
 
   <main>
     <div class="info-box">
-      <p><strong>Le specialità</strong> sono il modo in cui il Lupetto e la Coccinella mettono in gioco i propri
-        talenti, scoprono nuove passioni e imparano a fare del proprio meglio. <br> Ogni specialità è rappresentata da un
-        <strong>triangolo</strong> da cucire sull'uniforme. <br> Clicca su una specialità per leggerne la descrizione e gli
-        esempi di impegno personale.
+      <p>
+        <strong>Le specialità</strong> aiutano il Lupetto e la Coccinella a scoprire e sviluppare i propri talenti,
+        mettendosi in gioco con entusiasmo e curiosità.<br>
+
+        Ogni specialità rappresenta un’occasione per imparare qualcosa di nuovo, migliorarsi e fare del proprio meglio
+        attraverso attività, esperienze e impegni personali.<br>
+
+        Clicca su una specialità per scoprirne la descrizione, le prove e i suggerimenti.
       </p>
     </div>
 
@@ -1760,9 +1764,8 @@
       lista.innerHTML = '';
       const f = filtro.trim().toLowerCase();
       const filtrate = SPECIALITA.filter(s =>
-        !f || s.nome.toLowerCase().includes(f) ||
-        (s.varianti && s.varianti.toLowerCase().includes(f)) ||
-        s.descrizione.toLowerCase().includes(f)
+        !f ||
+        s.nome.toLowerCase().startsWith(f)
       );
 
       if (filtrate.length === 0) {
